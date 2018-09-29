@@ -12,13 +12,30 @@ h1 {
   text-align: center;
   text-transform: uppercase;
   font-weight: normal;
-  line-height: 1.1;
   margin: 0;
   padding: 20px 0;
+  transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+}
+
+button {
+  border: 0;
+  background: none;
+  outline: none;
+  transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
 }
 
 #colorDisplay {
-  font-size: 1.8em;
+  color: white;
+  font-weight: normal;
+  font-size: calc(14px + 4.6vw);
+  background: none;
+  border: none;
+  text-transform: uppercase;
+  margin: 1% 0;
 }
 
 #container {
@@ -48,21 +65,15 @@ h1 {
   color: white;
 }
 
-button {
+div button {
   float: right;
   display: block;
-  border: 0;
-  background: none;
   color: rgb(32, 32, 32);
   font-size: calc(5px + 0.8vw);
   font-weight: 600;
   text-transform: uppercase;
   height: 100%;
   padding: 0 8px;
-  outline: none;
-	transition: all 0.2s;
-	-webkit-transition: all 0.2s;
-	-moz-transition: all 0.2s;
 }
 
 #reset {
@@ -74,7 +85,12 @@ button {
   margin-right: 12%;
 }
 
-button:hover {
+button.mode:hover {
+  background-color: rgb(71, 18, 40);
+  color: white;
+}
+
+#reset:hover {
   background-color: rgb(32, 32, 32);
   color: white;
 }

@@ -36,6 +36,7 @@ function setupSquares () {
         selectedButton.style.color = textColor;
         h1.style.backgroundColor = pickedColor;
         h1.style.color = textColor;
+        colorDisplay.style.color = textColor;
         changeAllColors();
       } else {
         // messageDisplay.textContent = "Try Again";
@@ -58,6 +59,11 @@ function setupButtons() {
         resetColors(getSquareNumber(btn));
       }
     });
+  });
+
+  colorDisplay.addEventListener("click", function() {
+    colorDisplay.classList.toggle("cmyk");
+    colorDisplay.textContent = getColorDisplay();
   });
 }
 
@@ -125,11 +131,12 @@ function resetColors(num) {
   });
 
   pickedColor = pickColor(colors);
-  colorDisplay.textContent = pickedColor;
+  colorDisplay.textContent = getColorDisplay();
   
   resetButton.textContent = "New Colors";
   h1.style.backgroundColor = null;
   h1.style.color = null;
+  colorDisplay.style.color = null;
   modeButtons.forEach(function(ele) {
     ele.style.backgroundColor = null;
     ele.style.color = null;
@@ -153,5 +160,33 @@ function getSquareNumber(btn) {
     return 6;
   } else {
     return 9;
+  }
+}
+
+function toCMYK(rgbColor) {
+  rgbColor = rgbColor.split(",");
+  var r = rgbColor[0].split("(")[1] / 255;
+  var g = rgbColor[1] / 255;
+  var b = rgbColor[2].split(")")[0] / 255;
+
+  k = 1 - Math.max(r, g, b);
+  if (k < 1) {
+    c = Math.floor((1 - r - k) / (1 - k) * 100);
+    m = Math.floor((1 - g - k) / (1 - k) * 100);
+    y = Math.floor((1 - b - k) / (1 - k) * 100);
+  } else {
+    c = 0;
+    m = 0;
+    y = 0;
+  }
+  k = Math.floor(k * 100)
+  return "cmyk(" + c + ", " + m + ", " + y + ", " + k + ")";
+}
+
+function getColorDisplay() {
+  if (colorDisplay.classList.contains("cmyk")) {
+    return toCMYK(pickedColor)
+  } else {
+    return pickedColor;
   }
 }
