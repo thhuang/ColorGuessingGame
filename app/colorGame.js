@@ -2,9 +2,6 @@ var squares = document.querySelectorAll(".square");
 var colorDisplay = document.querySelector("#colorDisplay");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
-var easyButton = document.querySelector("#easyButton");
-var mediumButton = document.querySelector("#mediumButton");
-var hardButton = document.querySelector("#hardButton");
 var modeButtons = document.querySelectorAll(".mode");
 var hovorButton = document.querySelector("button:hover");
 
@@ -79,9 +76,26 @@ function changeAllColors() {
 }
 
 function generateRandomColors(num) {
-  var colorArray = [];
-  for (var i = 0; i < num; i++) {
-    colorArray.push(randomColor());
+  var colorArray = [randomColor()];
+  var evilColor;
+  if (selectedButton.textContent === "Evil") {
+    while (colorArray.length < num) {
+      evilColor = randomColor()
+      if (colorError(colorArray[0], evilColor) < 0.3) {
+        colorArray.push(evilColor);
+      }
+    }
+  } else if (selectedButton.textContent === "Hard") {
+    while (colorArray.length < num) {
+      evilColor = randomColor()
+      if (colorError(colorArray[0], evilColor) < 0.8) {
+        colorArray.push(evilColor);
+      }
+    }
+  } else {
+    while (colorArray.length < num) {
+      colorArray.push(randomColor());
+    }
   }
   return colorArray;
 }
@@ -189,4 +203,18 @@ function getColorDisplay() {
   } else {
     return pickedColor;
   }
+}
+
+function colorError(color1, color2) {
+  color1 = color1.split(",");
+  var r1 = color1[0].split("(")[1] / 255;
+  var g1 = color1[1] / 255;
+  var b1 = color1[2].split(")")[0] / 255;
+
+  color2 = color2.split(",");
+  var r2 = color2[0].split("(")[1] / 255;
+  var g2 = color2[1] / 255;
+  var b2 = color2[2].split(")")[0] / 255;
+
+  return ((r1 - r2)**2 + (g1 - g2)**2 + (b1 - b2)**2)**0.5
 }
