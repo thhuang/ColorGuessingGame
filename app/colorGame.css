@@ -1,0 +1,80 @@
+body {
+  background-color: rgb(32, 32, 32);
+  margin: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  min-width: 250px;
+}
+
+h1 {
+  background-color: rgb(71, 18, 40);
+  color: white;
+  font-size: calc(8px + 2.5vw);
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: normal;
+  line-height: 1.1;
+  margin: 0;
+  padding: 20px 0;
+}
+
+#colorDisplay {
+  font-size: 1.8em;
+}
+
+#container {
+	margin: 20px auto;
+	max-width: 600px;
+}
+
+.square {
+  float: left;
+  width: 30%;
+  padding-bottom: 30%;
+  margin: 1.66%;
+  border-radius: 12%;
+	transition: background 0.5s;
+	-webkit-transition: background 0.5s;
+	-moz-transition: background 0.5s;
+}
+
+#stripe {
+  background-color: white;
+  text-align: center;
+  height: 25px;
+}
+
+.selected {
+  background-color: rgb(71, 18, 40);
+  color: white;
+}
+
+button {
+  float: right;
+  display: block;
+  border: 0;
+  background: none;
+  color: rgb(32, 32, 32);
+  font-size: calc(5px + 0.8vw);
+  font-weight: 600;
+  text-transform: uppercase;
+  height: 100%;
+  padding: 0 8px;
+  outline: none;
+	transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+}
+
+#reset {
+  float: left;
+  margin-left: 12%;
+}
+
+#hardButton {
+  margin-right: 12%;
+}
+
+button:hover {
+  background-color: rgb(32, 32, 32);
+  color: white;
+}
