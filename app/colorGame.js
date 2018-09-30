@@ -64,9 +64,9 @@ function setupButtons() {
   });
 }
 
-function pickColor(colorArray) {
-  var randomIndex = Math.floor(Math.random() * colorArray.length);
-  return colorArray[randomIndex];
+function pickColor() {
+  var randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
 }
 
 function changeAllColors() {
@@ -79,6 +79,7 @@ function generateRandomColors(num) {
   var colorArray = [randomColor()];
   var evilColor;
   if (selectedButton.textContent === "Evil") {
+    setupEvilSquares(true);
     while (colorArray.length < num) {
       evilColor = randomColor()
       if (colorError(colorArray[0], evilColor) < 0.3) {
@@ -86,13 +87,15 @@ function generateRandomColors(num) {
       }
     }
   } else if (selectedButton.textContent === "Hard") {
+    setupEvilSquares(false);
     while (colorArray.length < num) {
-      evilColor = randomColor()
-      if (colorError(colorArray[0], evilColor) < 0.8) {
-        colorArray.push(evilColor);
+      hardColor = randomColor()
+      if (colorError(colorArray[0], hardColor) < 0.8) {
+        colorArray.push(hardColor);
       }
     }
   } else {
+    setupEvilSquares(false);
     while (colorArray.length < num) {
       colorArray.push(randomColor());
     }
@@ -144,7 +147,7 @@ function resetColors(num) {
     }
   });
 
-  pickedColor = pickColor(colors);
+  pickedColor = pickColor();
   colorDisplay.textContent = getColorDisplay();
   
   resetButton.textContent = "New Colors";
@@ -172,8 +175,12 @@ function getSquareNumber(btn) {
     return 3;
   } else if (btn.textContent === "Medium") {
     return 6;
-  } else {
+  } else if (btn.textContent === "Hard") {
     return 9;
+  } else if (btn.textContent === "Evil") {
+    return 16;
+  } else {
+    return 1;
   }
 }
 
@@ -217,4 +224,14 @@ function colorError(color1, color2) {
   var b2 = color2[2].split(")")[0] / 255;
 
   return ((r1 - r2)**2 + (g1 - g2)**2 + (b1 - b2)**2)**0.5
+}
+
+function setupEvilSquares (isEvil=false) {
+  squares.forEach(function(ele) {
+    if (isEvil) {
+      ele.classList.add("evilSquare");
+    } else {
+      ele.classList.remove("evilSquare");
+    }
+  });
 }

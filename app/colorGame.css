@@ -48,6 +48,12 @@ button {
 	-moz-transition: background 0.5s;
 }
 
+.evilSquare {
+  width: 22%;
+  padding-bottom: 22%;
+  margin: 1.5%;
+}
+
 #stripe {
   background-color: white;
   text-align: center;
